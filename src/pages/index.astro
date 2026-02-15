@@ -1,0 +1,67 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostList from '../components/PostList.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 5);
+
+const featuredProjects = (await getCollection('projects', ({ data }) => data.featured && !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout
+  title="Home"
+  description="Suchema — CPTO, software developer, and writer. Thoughts on technology, music, art, and the work of building products."
+>
+  <section class="intro">
+    <h1>Hello, I'm Suchema.</h1>
+    <p class="lead">
+      Chief Product & Technology Officer, software developer, and maker. I write about technology,
+      music, art, exercise, and the work of building products and teams.
+    </p>
+  </section>
+
+  {posts.length > 0 && (
+    <section class="home-section">
+      <h2 class="section-heading">Recent Posts</h2>
+      <PostList posts={posts} />
+      <a href="/posts/" class="see-all">All posts &rarr;</a>
+    </section>
+  )}
+
+  {featuredProjects.length > 0 && (
+    <section class="home-section">
+      <h2 class="section-heading">Featured Projects</h2>
+      <div class="projects-grid">
+        {featuredProjects.map((project) => (
+          <ProjectCard project={project} />
+        ))}
+      </div>
+      <a href="/projects/" class="see-all">All projects &rarr;</a>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .intro {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .intro h1 {
+    font-size: var(--text-4xl);
+    margin-bottom: var(--space-md);
+  }
+
+  .home-section {
+    margin-bottom: var(--space-3xl);
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: var(--space-lg);
+  }
+</style>

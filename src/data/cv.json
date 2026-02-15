@@ -1,0 +1,69 @@
+{
+  "name": "Suchema",
+  "title": "Chief Product & Technology Officer",
+  "summary": "Experienced technology leader with a track record of building and scaling products, engineering teams, and technical strategy. Passionate about clean architecture, developer experience, and shipping products that matter.",
+  "contact": {
+    "email": "hello@suchema.com",
+    "website": "https://www.suchema.com",
+    "linkedin": "https://linkedin.com/in/suchema",
+    "location": "United Kingdom"
+  },
+  "experience": [
+    {
+      "company": "Your Company",
+      "role": "Chief Product & Technology Officer",
+      "period": "2022 — Present",
+      "location": "London, UK",
+      "highlights": [
+        "Led product and engineering teams across the full product lifecycle",
+        "Defined and executed technical strategy aligned with business objectives",
+        "Built and scaled engineering culture focused on quality and velocity",
+        "Drove architectural decisions for scalability and maintainability"
+      ]
+    },
+    {
+      "company": "Previous Company",
+      "role": "VP of Engineering",
+      "period": "2019 — 2022",
+      "location": "London, UK",
+      "highlights": [
+        "Grew engineering team from 5 to 25 across multiple product squads",
+        "Introduced modern CI/CD practices and infrastructure-as-code",
+        "Shipped major product features that drove significant revenue growth"
+      ]
+    },
+    {
+      "company": "Earlier Company",
+      "role": "Senior Software Engineer",
+      "period": "2015 — 2019",
+      "location": "London, UK",
+      "highlights": [
+        "Full-stack development across web and mobile platforms",
+        "Mentored junior developers and led technical design reviews",
+        "Built core systems handling significant transaction volumes"
+      ]
+    }
+  ],
+  "education": [
+    {
+      "institution": "University",
+      "degree": "BSc Computer Science",
+      "period": "2011 — 2015"
+    }
+  ],
+  "skills": {
+    "technical": [
+      "TypeScript", "JavaScript", "Python", "Node.js",
+      "React", "Next.js", "Astro",
+      "PostgreSQL", "Redis", "AWS",
+      "Docker", "Kubernetes", "Terraform",
+      "System Design", "API Design"
+    ],
+    "leadership": [
+      "Engineering Management", "Product Strategy",
+      "Technical Architecture", "Team Building",
+      "Agile & Lean", "Stakeholder Management",
+      "Hiring & Mentoring", "OKR Frameworks"
+    ]
+  }
+}

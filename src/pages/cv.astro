@@ -1,0 +1,276 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import cvData from '../data/cv.json';
+---
+
+<BaseLayout
+  title="CV"
+  description={`${cvData.name} — ${cvData.title}. ${cvData.summary}`}
+>
+  <article class="cv">
+    <header class="cv-page-header">
+      <h1>CV</h1>
+      <div class="cv-downloads">
+        <a href="/cv/suchema-cv.pdf" class="btn" download>Download PDF</a>
+        <a href="/cv/suchema-cv.docx" class="btn" download>Download Word</a>
+      </div>
+    </header>
+
+    <div class="cv-content">
+      <!-- Header -->
+      <section class="cv-header">
+        <h2 class="cv-name">{cvData.name}</h2>
+        <p class="cv-title">{cvData.title}</p>
+        <p class="cv-contact-info">
+          {cvData.contact.location}
+          {' · '}
+          <a href={`mailto:${cvData.contact.email}`}>{cvData.contact.email}</a>
+          {' · '}
+          <a href={cvData.contact.website}>{cvData.contact.website.replace('https://', '')}</a>
+          {' · '}
+          <a href={cvData.contact.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </p>
+      </section>
+
+      <!-- Summary -->
+      <section class="cv-section">
+        <h3 class="cv-section-title">Summary</h3>
+        <p>{cvData.summary}</p>
+      </section>
+
+      <!-- Experience -->
+      <section class="cv-section">
+        <h3 class="cv-section-title">Experience</h3>
+        {cvData.experience.map((job) => (
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <div>
+                <h4 class="cv-entry-company">{job.company}</h4>
+                <p class="cv-entry-role">{job.role}</p>
+              </div>
+              <div class="cv-entry-meta">
+                <span class="cv-entry-period">{job.period}</span>
+                <span class="cv-entry-location">{job.location}</span>
+              </div>
+            </div>
+            <ul class="cv-entry-highlights">
+              {job.highlights.map((highlight) => (
+                <li>{highlight}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+
+      <!-- Education -->
+      <section class="cv-section">
+        <h3 class="cv-section-title">Education</h3>
+        {cvData.education.map((edu) => (
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <div>
+                <h4 class="cv-entry-company">{edu.institution}</h4>
+                <p class="cv-entry-role">{edu.degree}</p>
+              </div>
+              <div class="cv-entry-meta">
+                <span class="cv-entry-period">{edu.period}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      <!-- Skills -->
+      <section class="cv-section">
+        <h3 class="cv-section-title">Skills</h3>
+        <div class="cv-skills">
+          <div class="cv-skill-group">
+            <h4 class="cv-skill-label">Technical</h4>
+            <p class="cv-skill-list">{cvData.skills.technical.join(' · ')}</p>
+          </div>
+          <div class="cv-skill-group">
+            <h4 class="cv-skill-label">Leadership</h4>
+            <p class="cv-skill-list">{cvData.skills.leadership.join(' · ')}</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .cv-page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-2xl);
+    flex-wrap: wrap;
+    gap: var(--space-md);
+  }
+
+  .cv-page-header h1 {
+    margin-bottom: 0;
+  }
+
+  .cv-downloads {
+    display: flex;
+    gap: var(--space-sm);
+  }
+
+  .cv-content {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    line-height: 1.6;
+  }
+
+  .cv-header {
+    margin-bottom: var(--space-2xl);
+    padding-bottom: var(--space-xl);
+    border-bottom: 2px solid var(--color-text);
+  }
+
+  .cv-name {
+    font-family: var(--font-serif);
+    font-size: var(--text-3xl);
+    font-weight: 700;
+    margin: 0 0 var(--space-xs);
+  }
+
+  .cv-title {
+    font-size: var(--text-lg);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-sm);
+  }
+
+  .cv-contact-info {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+
+  .cv-contact-info a {
+    color: var(--color-text-muted);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .cv-contact-info a:hover {
+    color: var(--color-accent);
+  }
+
+  .cv-section {
+    margin-bottom: var(--space-2xl);
+  }
+
+  .cv-section-title {
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-muted);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid var(--color-border);
+    margin: 0 0 var(--space-lg);
+  }
+
+  .cv-entry {
+    margin-bottom: var(--space-xl);
+  }
+
+  .cv-entry:last-child {
+    margin-bottom: 0;
+  }
+
+  .cv-entry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--space-md);
+    margin-bottom: var(--space-sm);
+  }
+
+  .cv-entry-company {
+    font-size: var(--text-base);
+    font-weight: 600;
+    margin: 0;
+    font-family: var(--font-sans);
+  }
+
+  .cv-entry-role {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    font-style: italic;
+    margin: 0;
+  }
+
+  .cv-entry-meta {
+    text-align: right;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .cv-entry-period {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    display: block;
+  }
+
+  .cv-entry-location {
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+  }
+
+  .cv-entry-highlights {
+    padding-left: var(--space-lg);
+    margin: 0;
+  }
+
+  .cv-entry-highlights li {
+    margin-bottom: var(--space-xs);
+    line-height: 1.5;
+  }
+
+  .cv-skills {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .cv-skill-group {
+    display: flex;
+    gap: var(--space-md);
+    align-items: baseline;
+  }
+
+  .cv-skill-label {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    white-space: nowrap;
+    margin: 0;
+    min-width: 6em;
+  }
+
+  .cv-skill-list {
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  @media (max-width: 640px) {
+    .cv-entry-header {
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .cv-entry-meta {
+      text-align: left;
+    }
+
+    .cv-skill-group {
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+  }
+</style>

@@ -1,0 +1,46 @@
+/* =========================================
+   Theme — Light & Dark Mode Tokens
+   ========================================= */
+
+:root,
+:root[data-theme="light"] {
+  --color-bg: #fafaf8;
+  --color-text: #1a1a1a;
+  --color-text-muted: #6b6b6b;
+  --color-accent: #2563eb;
+  --color-accent-hover: #1d4ed8;
+  --color-border: #e5e5e0;
+  --color-code-bg: #f0f0ec;
+  --color-surface: #ffffff;
+  --color-nav-hover: #f0f0ec;
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --color-bg: #141414;
+  --color-text: #e8e8e3;
+  --color-text-muted: #999994;
+  --color-accent: #60a5fa;
+  --color-accent-hover: #93bbfd;
+  --color-border: #2a2a2a;
+  --color-code-bg: #1e1e1e;
+  --color-surface: #1a1a1a;
+  --color-nav-hover: #222222;
+  color-scheme: dark;
+}
+
+/* System preference fallback (for users who haven't toggled yet) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: #141414;
+    --color-text: #e8e8e3;
+    --color-text-muted: #999994;
+    --color-accent: #60a5fa;
+    --color-accent-hover: #93bbfd;
+    --color-border: #2a2a2a;
+    --color-code-bg: #1e1e1e;
+    --color-surface: #1a1a1a;
+    --color-nav-hover: #222222;
+    color-scheme: dark;
+  }
+}

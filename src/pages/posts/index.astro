@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('posts', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+
+<BaseLayout
+  title="Posts"
+  description="Writing about technology, music, art, exercise, and the work of building products."
+>
+  <h1>Posts</h1>
+  <p class="lead" style="margin-bottom: var(--space-2xl);">
+    Thoughts on technology, music, art, and whatever else is on my mind.
+  </p>
+
+  {posts.length > 0 ? (
+    <PostList posts={posts} />
+  ) : (
+    <p class="empty-state">No posts yet. Check back soon.</p>
+  )}
+</BaseLayout>
+
+<style>
+  .empty-state {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    padding: var(--space-2xl) 0;
+  }
+</style>

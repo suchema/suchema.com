@@ -1,0 +1,114 @@
+---
+/**
+ * Dense, text-focused post listing.
+ * Inspired by markboulton.co.uk's journal listing style.
+ * Shows date + title + description — no thumbnails, pure typography.
+ */
+
+interface Post {
+  id: string;
+  data: {
+    title: string;
+    description: string;
+    pubDate: Date;
+  };
+}
+
+interface Props {
+  posts: Post[];
+  basePath?: string;
+}
+
+const { posts, basePath = '/posts' } = Astro.props;
+---
+
+<ul class="post-list" role="list">
+  {posts.map((post) => (
+    <li class="post-list-item">
+      <time datetime={post.data.pubDate.toISOString()} class="post-list-date">
+        {post.data.pubDate.toLocaleDateString('en-GB', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        })}
+      </time>
+      <div class="post-list-content">
+        <a href={`${basePath}/${post.id}/`} class="post-list-title">
+          {post.data.title}
+        </a>
+        <p class="post-list-description">{post.data.description}</p>
+      </div>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .post-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .post-list-item {
+    display: flex;
+    gap: var(--space-lg);
+    padding: var(--space-md) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .post-list-item:first-child {
+    padding-top: 0;
+  }
+
+  .post-list-item:last-child {
+    border-bottom: none;
+  }
+
+  .post-list-date {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    white-space: nowrap;
+    min-width: 7em;
+    padding-top: 0.15em;
+  }
+
+  .post-list-content {
+    flex: 1;
+  }
+
+  .post-list-title {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    line-height: 1.3;
+    display: block;
+    margin-bottom: var(--space-xs);
+  }
+
+  .post-list-title:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .post-list-description {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .post-list-item {
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .post-list-date {
+      min-width: auto;
+    }
+  }
+</style>

@@ -1,0 +1,142 @@
+/* =========================================
+   CV Print Styles — For PDF Generation
+   ========================================= */
+
+@page {
+  margin: 1.5cm;
+  size: A4;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 10pt;
+  line-height: 1.5;
+  color: #1a1a1a;
+  background: white;
+}
+
+.cv-print-wrapper {
+  max-width: none;
+  padding: 0;
+}
+
+.cv-header {
+  margin-bottom: 1.5em;
+  padding-bottom: 1em;
+  border-bottom: 2px solid #1a1a1a;
+}
+
+.cv-header h1 {
+  font-size: 22pt;
+  font-weight: 700;
+  margin-bottom: 0.2em;
+  letter-spacing: -0.02em;
+}
+
+.cv-header .cv-title {
+  font-size: 12pt;
+  color: #555;
+  margin-bottom: 0.5em;
+}
+
+.cv-header .cv-contact {
+  font-size: 9pt;
+  color: #666;
+}
+
+.cv-header .cv-contact a {
+  color: #666;
+  text-decoration: none;
+}
+
+.cv-section {
+  margin-bottom: 1.5em;
+}
+
+.cv-section h2 {
+  font-size: 11pt;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #1a1a1a;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.3em;
+  margin-bottom: 0.8em;
+}
+
+.cv-entry {
+  margin-bottom: 1em;
+  page-break-inside: avoid;
+}
+
+.cv-entry-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.3em;
+}
+
+.cv-entry-header h3 {
+  font-size: 10.5pt;
+  font-weight: 600;
+}
+
+.cv-entry-header .cv-period {
+  font-size: 9pt;
+  color: #666;
+  white-space: nowrap;
+}
+
+.cv-entry .cv-role {
+  font-size: 9.5pt;
+  color: #555;
+  font-style: italic;
+  margin-bottom: 0.3em;
+}
+
+.cv-entry ul {
+  padding-left: 1.2em;
+  margin: 0;
+}
+
+.cv-entry li {
+  font-size: 9.5pt;
+  margin-bottom: 0.2em;
+  line-height: 1.4;
+}
+
+.cv-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3em 1em;
+}
+
+.cv-skill-category {
+  margin-bottom: 0.5em;
+}
+
+.cv-skill-category h3 {
+  font-size: 9.5pt;
+  font-weight: 600;
+  display: inline;
+}
+
+.cv-skill-category span {
+  font-size: 9.5pt;
+  color: #444;
+}
+
+/* Hide navigation, footer, download buttons in print */
+.site-header,
+.site-footer,
+.cv-downloads,
+.theme-toggle {
+  display: none !important;
+}
+
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

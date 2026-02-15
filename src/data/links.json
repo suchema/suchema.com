@@ -1,0 +1,22 @@
+[
+  {
+    "label": "LinkedIn",
+    "url": "https://linkedin.com/in/suchema",
+    "description": "Professional network & career"
+  },
+  {
+    "label": "GitHub",
+    "url": "https://github.com/suchema",
+    "description": "Code & open source"
+  },
+  {
+    "label": "Spotify",
+    "url": "https://open.spotify.com/user/suchema",
+    "description": "What I'm listening to"
+  },
+  {
+    "label": "Instagram",
+    "url": "https://instagram.com/suchema",
+    "description": "Photos & visual inspiration"
+  }
+]

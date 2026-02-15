@@ -1,0 +1,58 @@
+---
+/**
+ * Pluggable Analytics Component
+ *
+ * This component is the single place to configure your analytics provider.
+ * It only loads in production builds (not during development).
+ *
+ * To add analytics, uncomment one of the examples below or add your own.
+ *
+ * Supported providers (examples included):
+ * - Google Analytics (GA4)
+ * - Plausible Analytics (privacy-focused)
+ * - Fathom Analytics (privacy-focused)
+ * - Umami (self-hosted, privacy-focused)
+ * - PostHog (product analytics)
+ */
+---
+
+{import.meta.env.PROD && (
+  <!--
+    ======================================
+    ANALYTICS — Uncomment your provider
+    ======================================
+
+    Google Analytics (GA4):
+    Replace G-XXXXXXXXXX with your Measurement ID
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX" is:inline></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    ======================================
+
+    Plausible Analytics:
+
+    <script defer data-domain="suchema.com" src="https://plausible.io/js/script.js" is:inline></script>
+
+    ======================================
+
+    Fathom Analytics:
+    Replace XXXXXXXX with your Site ID
+
+    <script src="https://cdn.usefathom.com/script.js" data-site="XXXXXXXX" defer is:inline></script>
+
+    ======================================
+
+    Umami (self-hosted):
+    Replace the src and data-website-id with your values
+
+    <script defer src="https://analytics.yourdomain.com/script.js" data-website-id="xxx" is:inline></script>
+
+    ======================================
+  -->
+)}

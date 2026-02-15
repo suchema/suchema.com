@@ -1,0 +1,58 @@
+---
+/**
+ * Dark/Light mode toggle button.
+ * Uses localStorage for persistence, system preference as default.
+ * The inline script in BaseHead.astro prevents FOUC.
+ */
+---
+
+<button class="theme-toggle" aria-label="Toggle dark mode" type="button">
+  <span class="theme-toggle-label" aria-hidden="true"></span>
+</button>
+
+<style>
+  .theme-toggle {
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 0.35em 0.7em;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    font-size: var(--text-xs);
+    color: var(--color-text-muted);
+    transition: color 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .theme-toggle:hover {
+    color: var(--color-text);
+    border-color: var(--color-text-muted);
+  }
+</style>
+
+<script>
+  function initThemeToggle() {
+    const toggle = document.querySelector('.theme-toggle');
+    const label = toggle?.querySelector('.theme-toggle-label');
+
+    function updateLabel(theme: string) {
+      if (label) label.textContent = theme === 'dark' ? 'Light' : 'Dark';
+    }
+
+    updateLabel(document.documentElement.getAttribute('data-theme') || 'light');
+
+    toggle?.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      document.documentElement.style.colorScheme = next;
+      localStorage.setItem('theme', next);
+      updateLabel(next);
+    });
+  }
+
+  initThemeToggle();
+
+  // Re-initialize after Astro view transitions (if added later)
+  document.addEventListener('astro:after-swap', initThemeToggle);
+</script>

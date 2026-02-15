@@ -1,0 +1,88 @@
+---
+/**
+ * Print-optimized CV page.
+ * This page exists solely for PDF generation via browser print/save.
+ * It is NOT linked from the navigation.
+ * To generate a PDF: open this page in the browser and use Print → Save as PDF.
+ */
+import cvData from '../data/cv.json';
+import '../styles/cv-print.css';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{cvData.name} — CV</title>
+    <meta name="robots" content="noindex" />
+    <link rel="preload" href="/fonts/Inter-Variable.woff2" as="font" type="font/woff2" crossorigin />
+    <style>
+      @font-face {
+        font-family: 'Inter';
+        src: url('/fonts/Inter-Variable.woff2') format('woff2');
+        font-weight: 100 900;
+        font-style: normal;
+        font-display: swap;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cv-print-wrapper">
+      <header class="cv-header">
+        <h1>{cvData.name}</h1>
+        <p class="cv-title">{cvData.title}</p>
+        <p class="cv-contact">
+          {cvData.contact.location} · {cvData.contact.email} · {cvData.contact.website.replace('https://', '')}
+        </p>
+      </header>
+
+      <section class="cv-section">
+        <h2>Summary</h2>
+        <p>{cvData.summary}</p>
+      </section>
+
+      <section class="cv-section">
+        <h2>Experience</h2>
+        {cvData.experience.map((job) => (
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <h3>{job.company} — {job.role}</h3>
+              <span class="cv-period">{job.period}</span>
+            </div>
+            <p class="cv-role">{job.location}</p>
+            <ul>
+              {job.highlights.map((h) => (
+                <li>{h}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </section>
+
+      <section class="cv-section">
+        <h2>Education</h2>
+        {cvData.education.map((edu) => (
+          <div class="cv-entry">
+            <div class="cv-entry-header">
+              <h3>{edu.institution} — {edu.degree}</h3>
+              <span class="cv-period">{edu.period}</span>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      <section class="cv-section">
+        <h2>Skills</h2>
+        <div class="cv-skill-category">
+          <h3>Technical: </h3>
+          <span>{cvData.skills.technical.join(', ')}</span>
+        </div>
+        <div class="cv-skill-category">
+          <h3>Leadership: </h3>
+          <span>{cvData.skills.leadership.join(', ')}</span>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>

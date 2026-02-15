@@ -1,0 +1,126 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+const navItems = [
+  { label: 'About', href: '/about' },
+  { label: 'Posts', href: '/posts' },
+  { label: 'Projects', href: '/projects' },
+  { label: 'CV', href: '/cv' },
+  { label: 'Links', href: '/links' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="site-header">
+  <nav class="nav" aria-label="Primary">
+    <a href="/" class="nav-home">Suchema</a>
+    <div class="nav-right">
+      <ul class="nav-links" role="list">
+        {navItems.map(({ label, href }) => (
+          <li>
+            <a
+              href={href}
+              class:list={[
+                'nav-link',
+                { active: currentPath === href || (href !== '/' && currentPath.startsWith(href)) }
+              ]}
+            >
+              {label}
+            </a>
+          </li>
+        ))}
+      </ul>
+      <ThemeToggle />
+    </div>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    padding: var(--space-xl) 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-lg);
+  }
+
+  .nav-home {
+    font-family: var(--font-serif);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-home:hover {
+    text-decoration: none;
+    color: var(--color-accent);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-lg);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: var(--space-md);
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .nav-link {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    padding: var(--space-xs) 0;
+    position: relative;
+    transition: color 0.15s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  .nav-link.active {
+    color: var(--color-text);
+  }
+
+  .nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 1.5px;
+    background: var(--color-text);
+  }
+
+  @media (max-width: 640px) {
+    .nav {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--space-md);
+    }
+
+    .nav-right {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .nav-links {
+      flex-wrap: wrap;
+      gap: var(--space-xs) var(--space-md);
+    }
+  }
+</style>
